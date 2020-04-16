@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.gmail.queebskeleton.tpgofficeapp.deserializer.BCryptPasswordDeserializer;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -98,6 +101,7 @@ public class User {
 	 * This password is encrypted using the default BCryptPasswordEncoder class
 	 * in Spring Security.
 	 */
+	@JsonDeserialize(using = BCryptPasswordDeserializer.class)
 	private String password;
 	
 	/**
