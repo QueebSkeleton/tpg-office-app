@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RepositoryRestController
-public class AdminUserController {
+public class UserController {
 	
 	private final UserService userService;
 	
-	@PostMapping("/api/users/createAdmin")
+	@PostMapping("/api/users/create-admin")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createAdmin(@RequestBody UserForm userForm) {
 		userService.createAdmin(userForm);
