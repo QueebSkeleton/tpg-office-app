@@ -17,7 +17,7 @@ public class EventController {
 	
 	private final AttendanceService attendanceService;
 
-	@GetMapping(value = "/api/events/{id}/attendance-book.xslx", produces = "application/vnd.ms-excel")
+	@GetMapping(value = "/api/events/{id}/attendance-book.xlsx", produces = "application/vnd.ms-excel")
 	public Resource eventAttendanceExcelFile(
 			@PathVariable("id") long id) throws IOException {
 		

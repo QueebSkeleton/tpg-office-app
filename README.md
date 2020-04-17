@@ -288,12 +288,12 @@
       }
       ``` <br/><br/>
       
-    * **GET** `/api/events/{id}/attendance-book.xslx`
+    * **GET** `/api/events/{id}/attendance-book.xlsx`
       * **Description**: Generates an excel workbook containing names of both users and non-users
                          who attended event with {id}.
       * **Note**: In a future commit, attendance generation will only be allowed when the *status* of the
                   event is set to `FINISHED`.
-      * **Sample Response**: `application/vnd.ms-excel`, .xslx file. (Sample image in a future commit)
+      * **Sample Response**: `application/vnd.ms-excel`, .xlsx file. (Sample image in a future commit)
     
     * **GET** `/api/events/{id}/usersPreRegistered` <br/>
       * **Description**: Returns array of users registered on this event.
