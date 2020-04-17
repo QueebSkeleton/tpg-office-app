@@ -86,6 +86,12 @@ public class User {
 	private String emailAddress;
 	
 	/**
+	 * Facebook Profile URL of the user. Used for mailing and notification
+	 * capabilities of the system.
+	 */
+	private String facebookProfileUrl;
+	
+	/**
 	 * Birth date of the user. Used for notification capabilities.
 	 */
 	private LocalDate birthdate;

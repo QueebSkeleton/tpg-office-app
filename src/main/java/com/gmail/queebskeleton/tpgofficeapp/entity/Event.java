@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -73,11 +74,19 @@ public class Event {
 	private String venue;
 	
 	/**
-	 * Brief description of the event.
-	 * 
-	 * TODO: Include rich-text and markdown for descriptions.
+	 * Maximum count of attendees for this event.
 	 */
-	private String description;
+	private int maxCountOfAttendees;
+	
+	/**
+	 * Brief description of the event. Markdown-supported.
+	 */
+	private String briefDescription;
+	
+	/**
+	 * Main description of the event. Markdown-supported.
+	 */
+	private String mainDescription;
 	
 	/**
 	 * When this event was registered in the system.
@@ -97,14 +106,20 @@ public class Event {
 	private LocalDateTime expectedEnd;
 	
 	/**
-	 * List of all the users that needs to attend this event. All necessary
-	 * notifications and reminders for the attendees are referenced from this
-	 * field.
+	 * List of all the users that pre-registers to this event.
 	 * 
-	 * Has a {@code}ManyToMany{@code} reference to the User Entity class.
+	 * Has a ManyToMany relationship to the User Entity class.
 	 */
 	@ManyToMany
-	private List<User> usersNeededToAttend;
+	private List<User> usersPreRegistered;
+	
+	/**
+	 * List of event attendances.
+	 * 
+	 * Has a OneToMany relationship to the EventAttendance Entity class.
+	 */
+	@OneToMany(mappedBy = "event")
+	private List<EventAttendance> eventAttendances;
 	
 	/**
 	 * Current status of the event.
