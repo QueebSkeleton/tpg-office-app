@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -71,11 +74,19 @@ public class Event {
 	private String venue;
 	
 	/**
-	 * Brief description of the event.
-	 * 
-	 * TODO: Include rich-text and markdown for descriptions.
+	 * Maximum count of attendees for this event.
 	 */
-	private String description;
+	private int maxCountOfAttendees;
+	
+	/**
+	 * Brief description of the event. Markdown-supported.
+	 */
+	private String briefDescription;
+	
+	/**
+	 * Main description of the event. Markdown-supported.
+	 */
+	private String mainDescription;
 	
 	/**
 	 * When this event was registered in the system.
@@ -85,22 +96,38 @@ public class Event {
 	/**
 	 * Expected date and time of start of the event.
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime expectedStart;
 	
 	/**
 	 * Expected date and time of end of the event.
 	 */
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime expectedEnd;
 	
 	/**
-	 * List of all the users that needs to attend this event. All necessary
-	 * notifications and reminders for the attendees are referenced from this
-	 * field.
+	 * List of all the users that pre-registers to this event.
 	 * 
-	 * Has a {@code}ManyToMany{@code} reference to the User Entity class.
+	 * Has a ManyToMany relationship to the User Entity class.
 	 */
 	@ManyToMany
-	private List<User> usersNeededToAttend;
+	private List<User> usersPreRegistered;
+	
+	/**
+	 * List of attendances of registered users on the system.
+	 * 
+	 * Has a OneToMany relationship to the UserEventAttendance Entity class.
+	 */
+	@OneToMany(mappedBy = "event")
+	private List<UserEventAttendance> userEventAttendances;
+	
+	/**
+	 * List of attendances of non-registered (foreign) users on the system.
+	 * 
+	 * Has a OneToMany relationship to the NonUserEventAttendance Entity class.
+	 */
+	@OneToMany(mappedBy = "event")
+	private List<NonUserEventAttendance> nonUserEventAttendances;
 	
 	/**
 	 * Current status of the event.

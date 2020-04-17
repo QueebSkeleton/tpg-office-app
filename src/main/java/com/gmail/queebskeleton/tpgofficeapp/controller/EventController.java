@@ -1,28 +1,28 @@
 package com.gmail.queebskeleton.tpgofficeapp.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import java.io.IOException;
+
+import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gmail.queebskeleton.tpgofficeapp.entity.dto.EventForm;
-import com.gmail.queebskeleton.tpgofficeapp.service.EventService;
+import com.gmail.queebskeleton.tpgofficeapp.service.AttendanceService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/events")
 public class EventController {
 	
-	private final EventService eventService;
+	private final AttendanceService attendanceService;
 
-	@PostMapping("/createEvent")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void createEvent(@RequestBody EventForm eventForm) {
-		eventService.createEvent(eventForm);
+	@GetMapping(value = "/api/events/{id}/attendance-book.xlsx", produces = "application/vnd.ms-excel")
+	public Resource eventAttendanceExcelFile(
+			@PathVariable("id") long id) throws IOException {
+		
+		return attendanceService.generateAttendanceWorksheetForEvent(id);
+		
 	}
 	
 }
