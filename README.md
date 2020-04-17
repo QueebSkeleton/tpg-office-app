@@ -43,7 +43,8 @@
         Facebook Graph API.
       * All source codes can be submitted directly in the application, and will notify
         of results.
-      * **Note**: Considered integratable APIs are `CodeForces API` or the Code `Judger API`.
+      * **Note**: Considered integratable APIs are `CodeForces API` or an implementation
+        of `Judge0 API`.
       * **Note**: This module is not final.
       <br/>
   * **Notification and Chatbot API**
