@@ -114,12 +114,20 @@ public class Event {
 	private List<User> usersPreRegistered;
 	
 	/**
-	 * List of event attendances.
+	 * List of attendances of registered users on the system.
 	 * 
-	 * Has a OneToMany relationship to the EventAttendance Entity class.
+	 * Has a OneToMany relationship to the UserEventAttendance Entity class.
 	 */
 	@OneToMany(mappedBy = "event")
-	private List<EventAttendance> eventAttendances;
+	private List<UserEventAttendance> userEventAttendances;
+	
+	/**
+	 * List of attendances of non-registered (foreign) users on the system.
+	 * 
+	 * Has a OneToMany relationship to the NonUserEventAttendance Entity class.
+	 */
+	@OneToMany(mappedBy = "event")
+	private List<NonUserEventAttendance> nonUserEventAttendances;
 	
 	/**
 	 * Current status of the event.

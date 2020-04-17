@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "event_attendances")
-public class EventAttendance {
+@Table(name = "non_user_event_attendances")
+public class NonUserEventAttendance {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,5 @@ public class EventAttendance {
 	private Event event;
 	
 	private String attendeeName;
-	
-	private boolean hasAttended;
 
 }
