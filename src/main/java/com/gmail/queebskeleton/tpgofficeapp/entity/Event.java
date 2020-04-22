@@ -33,7 +33,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "events")
+@Table(name = "tpg_events")
 public class Event {
 	
 	/**
