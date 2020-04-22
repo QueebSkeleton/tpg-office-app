@@ -2,6 +2,8 @@ package com.gmail.queebskeleton.tpgofficeapp.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -9,6 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.gmail.queebskeleton.tpgofficeapp.deserializer.BCryptPasswordDeserializer;
@@ -25,7 +31,7 @@ import lombok.NoArgsConstructor;
  * Mapped to a row in the database table 'user'.
  * 
  * @author queenskeleton
- * @version 1.0
+ * @version 1.1
  *
  */
 @Data
@@ -33,8 +39,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tpg_users")
-public class User {
+public class User implements UserDetails {
 	
+	/**
+	 * Serial Version of this class
+	 */
+	private static final long serialVersionUID = 11L;
+
 	/**
 	 * Enumeration that represents the role of the User in the system. Helps
 	 * Spring Security determine what resources this User can access in the
@@ -116,5 +127,33 @@ public class User {
 	 */
 	@Enumerated
 	private Role role;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_" + role.toString()));
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO: Add implementation for account locking
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO: Add implementation for credentials expiry
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO: Add implementation for validation of accounts and enabling
+		return true;
+	}
 	
 }

@@ -12,8 +12,9 @@ import java.security.cert.CertificateException;
 import javax.annotation.PostConstruct;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
+
+import com.gmail.queebskeleton.tpgofficeapp.entity.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
