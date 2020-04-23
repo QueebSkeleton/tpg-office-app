@@ -54,13 +54,24 @@ public class User implements UserDetails {
 	 * @author queenskeleton
 	 *
 	 */
-	public static enum Role {
+	public enum Role {
 		
 		/**
 		 * Administrator in the system. Can perform all operations the
 		 * system is implemented on.
 		 */
-		ADMINISTRATOR
+		ADMINISTRATOR("Administrator");
+
+		private String str;
+
+		Role(String str) {
+			this.str = str;
+		}
+
+		public String getStr() {
+			return str;
+		}
+
 	}
 
 	/**

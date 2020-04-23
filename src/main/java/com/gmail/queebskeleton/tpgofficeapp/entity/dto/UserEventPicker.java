@@ -8,7 +8,9 @@ import com.gmail.queebskeleton.tpgofficeapp.entity.User;
 public interface UserEventPicker {
 
 	Long getId();
+
 	String getFirstName();
+
 	String getLastName();
 	
 }
