@@ -9,8 +9,25 @@ Implementation is limited as of the moment.
 
 Implemented as a series of REST APIs, set to be integrated with a UI Application.  
 
----
+Link to Front-End Application (Vue.JS): _Implementation has not started yet._
 
+## Technologies Used
+
+* **Language**: Java  
+* **Build Tool and Dependency Management**: Maven  
+* **Framework**: Spring Framework  
+    * Core Framework - Dependency Injection  
+    * Spring Boot - bootstrapping the application, enables creating only a runnable JAR with embedded tomcat app server  
+    * Spring Data JPA (Boot Starter) - data-access for the application. Configuratin values are in application.yml under src/main/resources  
+    * Spring Data REST (Boot Starter) - easier implementation of CRUD REST APIs, and other possible functionalities (with HAL functionality)  
+    * Spring Web (Boot Starter)  
+        * Spring MVC - creating web-applications that follow the Model-View-Controller software architecture pattern  
+        * Spring Integration - enables RestTemplate functionality  
+    * Spring Security (Boot Starter) - security for the resources provided  
+* **Other Java APIs used**:  
+    * Apache POI - for Microsoft Document auto-generation  
+    * JSON Web Tokens - JWT security implementation (easy security for REST APIs)  
+    * Lombok - POJO boilerplate code auto-generated at runtime (i.e. Getters/Setters, Constructors). It can also easily help remove boilerplate code for Spring's Dependency Injection.
 ## Target Functionalities
   
 1. **User Management**  
@@ -40,8 +57,6 @@ Implemented as a series of REST APIs, set to be integrated with a UI Application
 1. **Notification and Auto-Messaging API**  
    * All required tasks are notified and sent to the users through Facebook or GMail.  
    * **Note**: Done via either a `mailing server (SMTP)` or the `Facebook Graph API`.  
-
----
 
 ## Resources Exposed
   
@@ -225,8 +240,6 @@ Implemented as a series of REST APIs, set to be integrated with a UI Application
   * **DELETE** `/api/users/{id}`  
     * **Description**: Deletes a user resource by {id}  
     * **Sample Response Body**: `204 No Content` if success  
-  
-----
 
 * ### Event Resource  
   * **GET** `/api/events`  
