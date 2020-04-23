@@ -10,8 +10,11 @@ import com.gmail.queebskeleton.tpgofficeapp.entity.User;
 public interface UserAdminTable {
 	
 	String getFirstName();
+
 	String getLastName();
+
 	String getEmailAddress();
+
 	LocalDateTime getCreatedOn();
 
 }

@@ -19,7 +19,7 @@ import com.gmail.queebskeleton.tpgofficeapp.entity.Event;
 @RepositoryRestResource(collectionResourceRel = "events", path = "events")
 public interface EventRepository extends JpaRepository<Event, Long> {
 	
-	@RestResource
+	@RestResource(path = "by-expectedstart-year-month")
 	@Query("SELECT e FROM Event e WHERE year(e.expectedStart) = ?1 AND month(e.expectedStart) = ?2")
 	List<Event> findAllByExpectedStart_YearAndExpectedStart_Month_Value(int year, int month);
 	
