@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,30 +26,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final UserDetailsService userDetailsService;
 	
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		http
-			
+
 			// Disable cross-site request forgery, since we are using JWT
 			.csrf().disable()
-			
+
 			.authorizeRequests()
-			
+				.antMatchers("/api**").authenticated()
+				.antMatchers(
+						"/api/logs**",
+						"/api/users**",
+						"/api/events**").hasAnyRole("ADMINISTRATOR", "OFFICER")
 				.antMatchers("/api/auth/login").permitAll()
-				.antMatchers("/api/users**").hasRole("ADMINISTRATOR")
-				.antMatchers("/api/events**").hasRole("ADMINISTRATOR")
-				.antMatchers("/api/logs**").hasRole("ADMINISTRATOR")
-				
+
 			.and()
-			
+
 				.sessionManagement(cust -> cust.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-				
+
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-		
+
 	}
-	
+
 
 	@Override
 	@Bean(BeanIds.AUTHENTICATION_MANAGER)

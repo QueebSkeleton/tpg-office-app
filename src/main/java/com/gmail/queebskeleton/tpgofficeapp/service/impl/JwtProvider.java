@@ -45,9 +45,9 @@ public class JwtProvider {
 
 	}
 
-	public String generateToken(Authentication authentication) {
+	public String generateToken(String username) {
 
-		return Jwts.builder().setSubject(((User) authentication.getPrincipal()).getUsername()).signWith(getPrivateKey()).compact();
+		return Jwts.builder().setSubject(username).signWith(getPrivateKey()).compact();
 
 	}
 

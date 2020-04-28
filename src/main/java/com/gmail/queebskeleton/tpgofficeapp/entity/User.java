@@ -60,7 +60,9 @@ public class User implements UserDetails {
 		 * Administrator in the system. Can perform all operations the
 		 * system is implemented on.
 		 */
-		ADMINISTRATOR("Administrator");
+		ADMINISTRATOR("Administrator"),
+		OFFICER("Officer"),
+		MEMBER("Member");
 
 		private String str;
 

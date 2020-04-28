@@ -1,5 +1,7 @@
 package com.gmail.queebskeleton.tpgofficeapp.service.impl;
 
+import com.gmail.queebskeleton.tpgofficeapp.entity.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
 						loginForm.getPassword()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String authenticationToken = jwtProvider.generateToken(authentication);
+		String authenticationToken = jwtProvider.generateToken(((User) authentication.getPrincipal()).getUsername());
 		
 		return new LoginResponse(authenticationToken, loginForm.getUsername());
 		
